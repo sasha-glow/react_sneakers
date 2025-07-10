@@ -1,10 +1,11 @@
-function Drawer() {
+function Drawer({ onClose, items = []}) {
   return (
-    <div style={{ display: "none" }} className="overlay">
+    <div className="overlay">
       <div className="drawer">
         <h2 className="mb-30 d-flex justify-between align-center mb-30">
           Корзина
           <img
+            onClick={onClose}
             className="removeBtn cu-p"
             src="/img/btn-remove.svg"
             alt="Remove"
@@ -12,35 +13,26 @@ function Drawer() {
         </h2>
 
         <div className="cartItems">
-          <div className="cartItem d-flex align-center mb-20">
-            <img
-              className="mr-20"
-              width={70}
-              height={70}
-              src="/img/sneakers/01.jpg"
-              alt="Sneakers"
-            />
-            <div className="mr-20">
-              <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
+          {items.map((obj) => (
+            <div className="cartItem d-flex align-center mb-20">
+              <img
+                className="mr-20"
+                width={70}
+                height={70}
+                src={obj.imageUrl}
+                alt="Sneakers"
+              />
+              <div className="mr-20">
+                <p className="mb-5">{obj.title}</p>
+                <b>{obj.price} руб.</b>
+              </div>
+              <img
+                className="removeBtn"
+                src="/img/btn-remove.svg"
+                alt="Remove"
+              />
             </div>
-            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
-          </div>
-
-          <div className="cartItem d-flex align-center mb-20">
-            <img
-              className="mr-20"
-              width={70}
-              height={70}
-              src="/img/sneakers/01.jpg"
-              alt="Sneakers"
-            />
-            <div className="mr-20">
-              <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 руб.</b>
-            </div>
-            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
-          </div>
+          ))}
         </div>
 
         <div className="cartTotalBlock">
