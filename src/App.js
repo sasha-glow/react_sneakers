@@ -76,12 +76,22 @@ function App() {
       .then(response => response.json())
       .then(json => setItems(json));
   }, []);
+
+  const onAddToCart = (obj) => {
+    const itemExist = cartItems.some(item => item.title === obj.title);
+    if (!itemExist) setCartItems(prev => [...prev, obj]);
+  }
+
+  const removeFromCart = (obj) => {
+    setCartItems(prev => prev.filter(item => item.title !== obj.title))
+  }
   
   return (
     <div className="wrapper clear">
       {cartOpened && <Drawer 
           onClose={() => setCartOpened(false)}
           items={cartItems} 
+          onRemove={(obj) => removeFromCart(obj)}
         />
       }
       <Header
@@ -97,13 +107,13 @@ function App() {
         </div>
 
         <div className="d-flex cards">
-          {items.map((obj) => (
+          {items.map((item) => (
             <Card
-              title={obj.title}
-              price={obj.price}
-              imageUrl={obj.imageUrl}
+              title={item.title}
+              price={item.price}
+              imageUrl={item.imageUrl}
               onFavorite={() => console.log("Добавили в закладки")}
-              onPlus={() => console.log("Нажали на плюс")}
+              onPlus={(obj) => onAddToCart(obj)}
             />
           ))}
         </div>
