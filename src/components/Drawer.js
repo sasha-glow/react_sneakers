@@ -31,7 +31,7 @@ function Drawer({ onClose, onRemove, items = []}) {
                 className="removeBtn"
                 src="/img/btn-remove.svg"
                 alt="Remove"
-                onClick={() => onRemove(obj)}
+                onClick={() => onRemove(obj.id)}
               />
             </div>
           ))}
