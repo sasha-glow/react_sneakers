@@ -69,6 +69,7 @@ import Drawer from "./components/Drawer";
 
 function App() {
   const [items, setItems] = React.useState([]);
+  // const [favorites, setFavorites] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
@@ -100,6 +101,10 @@ function App() {
   const oninputSeacrh = (event) => {
     setSearchValue(event.target.value);
   };
+
+  // const onAddToFavorite = (obj) => {
+  //   axios.post("https://686fbc5f91e85fac42a2531d.mockapi.io/cart", obj);
+  // }
 
   return (
     <div className="wrapper clear">
