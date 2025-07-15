@@ -69,14 +69,14 @@ import Drawer from "./components/Drawer";
 
 function App() {
   const [items, setItems] = React.useState([]);
-  // const [favorites, setFavorites] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
 
   React.useEffect(() => {
     axios
-      .get("https://686fbc5f91e85fac42a2531d.mockapi.io/items")
+      .get("https://my-json-server.typicode.com/sasha-glow/react_sneakers/sneakers")
       .then((response) => {
         setItems(response.data);
       });
@@ -102,9 +102,11 @@ function App() {
     setSearchValue(event.target.value);
   };
 
-  // const onAddToFavorite = (obj) => {
-  //   axios.post("https://686fbc5f91e85fac42a2531d.mockapi.io/cart", obj);
-  // }
+  const onAddToFavorite = (obj) => {
+    axios.post("https://686fbc5f91e85fac42a2531d.mockapi.io/favorite", obj);
+    // const itemExist = favorites.some((item) => item.title === obj.title);
+    setFavorites((prev) => [...prev, obj]);
+  }
 
   return (
     <div className="wrapper clear">
@@ -153,7 +155,7 @@ function App() {
                 title={item.title}
                 price={item.price}
                 imageUrl={item.imageUrl}
-                onFavorite={() => console.log("Добавили в закладки")}
+                onFavorite={(obj) => onAddToFavorite(obj)}
                 onPlus={(obj) => onAddToCart(obj)}
               />
             ))}

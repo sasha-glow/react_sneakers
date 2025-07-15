@@ -6,6 +6,7 @@ function Card({ title, price, imageUrl, onFavorite, onPlus }) {
   const [isFavorite, setIsFavorite] = React.useState(false);
 
   const onClickFavorite = () => {
+    onFavorite({ title, price, imageUrl });
     setIsFavorite(!isFavorite);
   };
 
